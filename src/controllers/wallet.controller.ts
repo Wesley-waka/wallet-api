@@ -62,7 +62,7 @@ export async function depositWallet(req: Request, res: Response) {
 }
 
 export async function getWallet(req: Request, res: Response) {
-    const { username } = req.params;
+    const { username } = req.body;
 
     try{
         const wallet = await prisma.wallet.findUnique({
@@ -157,7 +157,7 @@ export async function transferFunds(req: Request, res: Response) {
 }
 
 export async function getTransactions(req: Request, res: Response) {
-    const { username,transactionType } = req.params;
+    const { username,transactionType } = req.body;
 
     if(!username){
         return res.status(400).json({ error: "Username is required" });
