@@ -1,0 +1,37 @@
+version: '3.8'
+
+services:
+  wallet-api:
+    build: .
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+    volumes:
+      - .:/app
+    restart: unless-stopped
+    depends_on:
+      - postgres
+    networks:
+      - wallet-network
+      
+  postgres:
+    image: postgres:15
+    environment:
+      POSTGRES_DB: wallet
+      POSTGRES_USER: wallet
+      POSTGRES_PASSWORD: wallet
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - wallet-network
+    restart: unless-stopped
+
+volumes:
+  postgres_data:
+
+networks:
+  wallet-network:
+    driver: bridge
