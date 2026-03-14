@@ -29,18 +29,3 @@ export async function getTransactions(req: Request, res: Response) {
         res.status(500).json({ error: "Internal server error" });
     }
 }
-    
-
-// export async function createTransaction(username: string, userFunded: string, amount: number) {
-
-//     await prisma.transaction.create({
-//         data: {
-//             sender_wallet_id: username,
-//             receiver_wallet_id: userFunded,
-//             amount: amount,
-//             type: "SENT"
-//         }
-//     }); 
-    
-// }
-
