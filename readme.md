@@ -60,7 +60,7 @@ wallet-api/
 
 ## ERD Diagram
 
-![ERD](./WalletERD.png)
+![ERD](./WalletERDpng.png)
 
 ## GIT Flow Diagram
 
