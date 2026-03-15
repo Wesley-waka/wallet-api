@@ -12,6 +12,7 @@ services:
       - postgres
     networks:
       - wallet-network
+    command: sh -c "npx prisma migrate deploy && npm start"
 
   postgres:
     image: postgres:15-alpine

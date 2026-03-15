@@ -55,7 +55,46 @@
 							]
 						}
 					},
-					"response": []
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"username\": \"xWaka\"\n}"
+								},
+								"url": {
+									"raw": "http://localhost:4000/wallet",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "4000",
+									"path": [
+										"wallet"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"id\": \"clx123abc456def789\",\n  \"userName\": \"xWaka\",\n  \"balance\": 0,\n  \"createdAt\": \"2024-03-15T10:30:00.000Z\",\n  \"updatedAt\": \"2024-03-15T10:30:00.000Z\"\n}"
+						}
+					]
 				},
 				{
 					"name": "Get Wallet",
@@ -97,7 +136,68 @@
 							]
 						}
 					},
-					"response": []
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:4000/wallet/xWaka",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "4000",
+									"path": [
+										"wallet",
+										"xWaka"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"id\": \"clx123abc456def789\",\n  \"userName\": \"xWaka\",\n  \"balance\": 1500.50,\n  \"createdAt\": \"2024-03-15T10:30:00.000Z\",\n  \"updatedAt\": \"2024-03-15T11:45:00.000Z\"\n}"
+						},
+						{
+							"name": "Wallet Not Found",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:4000/wallet/nonexistent",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "4000",
+									"path": [
+										"wallet",
+										"nonexistent"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								}
+							],
+							"cookie": [],
+							"body": "null"
+						}
+					]
 				},
 				{
 					"name": "Deposit Funds",
@@ -145,7 +245,47 @@
 							]
 						}
 					},
-					"response": []
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"username\": \"xWaka\",\n    \"amount\": 1000\n}"
+								},
+								"url": {
+									"raw": "http://localhost:4000/wallet/deposit",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "4000",
+									"path": [
+										"wallet",
+										"deposit"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"id\": \"clx123abc456def789\",\n  \"userName\": \"xWaka\",\n  \"balance\": 1000,\n  \"createdAt\": \"2024-03-15T10:30:00.000Z\",\n  \"updatedAt\": \"2024-03-15T11:45:00.000Z\"\n}"
+						}
+					]
 				},
 				{
 					"name": "Withdraw Funds",
@@ -193,7 +333,86 @@
 							]
 						}
 					},
-					"response": []
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"username\": \"xWaka\",\n    \"amount\": 500\n}"
+								},
+								"url": {
+									"raw": "http://localhost:4000/wallet/withdraw",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "4000",
+									"path": [
+										"wallet",
+										"withdraw"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"id\": \"clx123abc456def789\",\n  \"userName\": \"xWaka\",\n  \"balance\": 500,\n  \"createdAt\": \"2024-03-15T10:30:00.000Z\",\n  \"updatedAt\": \"2024-03-15T11:50:00.000Z\"\n}"
+						},
+						{
+							"name": "Insufficient Funds",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"username\": \"xWaka\",\n    \"amount\": 2000\n}"
+								},
+								"url": {
+									"raw": "http://localhost:4000/wallet/withdraw",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "4000",
+									"path": [
+										"wallet",
+										"withdraw"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"error\": \"Insufficient funds\"\n}"
+						}
+					]
 				},
 				{
 					"name": "Transfer Funds",
@@ -241,7 +460,86 @@
 							]
 						}
 					},
-					"response": []
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"username\": \"xWaka\",\n    \"amount\": 200,\n    \"userFunded\": \"will_smith\"\n}"
+								},
+								"url": {
+									"raw": "http://localhost:4000/wallet/transfer",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "4000",
+									"path": [
+										"wallet",
+										"transfer"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"message\": \"Transfer successful\"\n}"
+						},
+						{
+							"name": "Insufficient Funds",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"username\": \"xWaka\",\n    \"amount\": 5000,\n    \"userFunded\": \"will_smith\"\n}"
+								},
+								"url": {
+									"raw": "http://localhost:4000/wallet/transfer",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "4000",
+									"path": [
+										"wallet",
+										"transfer"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"error\": \"Insufficient funds\"\n}"
+						}
+					]
 				}
 			]
 		},
@@ -292,7 +590,46 @@
 							]
 						}
 					},
-					"response": []
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"username\": \"xWaka\"\n}"
+								},
+								"url": {
+									"raw": "http://localhost:4000/transaction",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "4000",
+									"path": [
+										"transaction"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								}
+							],
+							"cookie": [],
+							"body": "[\n  {\n    \"id\": \"clx456def789ghi012\",\n    \"sender_wallet_id\": \"clx123abc456def789\",\n    \"receiver_wallet_id\": \"clx789ghi012jkl345\",\n    \"amount\": 200,\n    \"type\": \"SENT\",\n    \"createdAt\": \"2024-03-15T12:00:00.000Z\",\n    \"updatedAt\": \"2024-03-15T12:00:00.000Z\"\n  },\n  {\n    \"id\": \"clx789ghi012jkl345\",\n    \"sender_wallet_id\": null,\n    \"receiver_wallet_id\": \"clx123abc456def789\",\n    \"amount\": 1000,\n    \"type\": \"DEPOSIT\",\n    \"createdAt\": \"2024-03-15T11:45:00.000Z\",\n    \"updatedAt\": \"2024-03-15T11:45:00.000Z\"\n  }\n]"
+						}
+					]
 				},
 				{
 					"name": "Get Transactions by Type",
@@ -338,7 +675,84 @@
 							]
 						}
 					},
-					"response": []
+					"response": [
+						{
+							"name": "Success - SENT transactions",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"username\": \"xWaka\",\n    \"transactionType\": \"SENT\"\n}"
+								},
+								"url": {
+									"raw": "http://localhost:4000/transaction",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "4000",
+									"path": [
+										"transaction"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								}
+							],
+							"cookie": [],
+							"body": "[\n  {\n    \"id\": \"clx456def789ghi012\",\n    \"sender_wallet_id\": \"clx123abc456def789\",\n    \"receiver_wallet_id\": \"clx789ghi012jkl345\",\n    \"amount\": 200,\n    \"type\": \"SENT\",\n    \"createdAt\": \"2024-03-15T12:00:00.000Z\",\n    \"updatedAt\": \"2024-03-15T12:00:00.000Z\"\n  }\n]"
+						},
+						{
+							"name": "Success - RECEIVED transactions",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"username\": \"xWaka\",\n    \"transactionType\": \"RECEIVED\"\n}"
+								},
+								"url": {
+									"raw": "http://localhost:4000/transaction",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "4000",
+									"path": [
+										"transaction"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								}
+							],
+							"cookie": [],
+							"body": "[\n  {\n    \"id\": \"clx012jkl345mno678\",\n    \"sender_wallet_id\": \"clx789ghi012jkl345\",\n    \"receiver_wallet_id\": \"clx123abc456def789\",\n    \"amount\": 150,\n    \"type\": \"RECEIVED\",\n    \"createdAt\": \"2024-03-15T12:15:00.000Z\",\n    \"updatedAt\": \"2024-03-15T12:15:00.000Z\"\n  }\n]"
+						}
+					]
 				}
 			]
 		},
@@ -379,7 +793,37 @@
 							]
 						}
 					},
-					"response": []
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:4000/",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "4000",
+									"path": [
+										""
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain; charset=utf-8"
+								}
+							],
+							"cookie": [],
+							"body": "Hello World From Wallet API!"
+						}
+					]
 				}
 			]
 		}

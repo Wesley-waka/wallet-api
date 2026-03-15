@@ -63,6 +63,10 @@ async function getWallet(req: Request, res: Response) {
             }
         });
 
+        if (!wallet) {
+            return res.status(404).json({ error: "Wallet not found" });
+        }
+
         res.status(200).json(wallet);
     } catch (error) {
         res.status(500).json({ error: "Internal server error" });
