@@ -5,6 +5,16 @@ import { debitWallet, getWalletValidate, updateWalletBalance, withdrawFundsWalle
 
 async function createWallet(req: Request, res: Response) {
     const { username } = req.body;
+    const usernameUnique = await getWalletValidate(username);
+    
+
+    if(!username){
+        return res.status(400).json({ error: "Username is required" });
+    }
+
+    if(usernameUnique){
+        return res.status(400).json({ error: "Username already exists" });
+    }
     
     try{
         const wallet = await prisma.wallet.create({
@@ -92,6 +102,10 @@ async function transferFunds(req: Request, res: Response) {
 
     if(!userFunded || !amount){
         return res.status(400).json({ error: "User funded and amount are required" });
+    }
+
+    if(userFunded === username){
+        return res.status(400).json({ error: "User funded and username cannot be the same" });
     }
 
     const userFundedWallet = await getWalletValidate(userFunded);
