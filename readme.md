@@ -24,7 +24,7 @@ Postman collection for Wallet API backend project. This collection includes all 
 
 ## Project Structure
 
-![Project Structure](./project-structure.png)
+![Project Structure](./project_structure.png)
 
 
 ## ERD Diagram
