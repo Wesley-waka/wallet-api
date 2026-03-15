@@ -1,23 +1,41 @@
-import prisma from "../lib/prisma";
+import { prisma } from "../lib/prisma";
 
-export enum TransactionType {
-    SENT = "SENT",
-    RECEIVED = "RECEIVED",
-    WITHDRAWAL = "WITHDRAWAL",
-    DEPOSIT = "DEPOSIT"
+enum TransactionType {
+  SENT = "SENT",
+  RECEIVED = "RECEIVED",
+  WITHDRAWAL = "WITHDRAWAL",
+  DEPOSIT = "DEPOSIT",
 }
 
-export async function createTransaction(userFunded: string | null, username: string | null,amount: number | null,transaction_type: TransactionType) {
 
-    await prisma.transaction.create({
-        data: {
-            sender_wallet_id: username,
-            receiver_wallet_id: userFunded,
-            amount: amount,
-            type: transaction_type
-        }
-    }); 
-    
-}   
+async function createTransaction(
+  senderUsername: string | null,
+  receiverUsername: string | null,
+  amount: number,
+  transaction_type: TransactionType
+) {
+  if (amount === null) throw new Error("Amount is required");
+
+  const senderId = senderUsername
+    ? (await prisma.wallet.findUnique({ where: { userName: senderUsername } }))?.id
+    : null;
+  const receiverId = receiverUsername
+    ? (await prisma.wallet.findUnique({ where: { userName: receiverUsername } }))?.id
+    : null;
+
+  
+  return await prisma.transaction.create({
+    data: {
+      sender_wallet_id: senderId ?? receiverId!,   
+      receiver_wallet_id: receiverId ?? senderId!, 
+      amount,
+      type: transaction_type,
+    },
+  });
+}
 
 
+export {
+    createTransaction,
+    TransactionType
+}
