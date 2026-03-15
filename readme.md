@@ -67,7 +67,7 @@ Postman collection for Wallet API backend project. This collection includes all 
    ```
 5. Run database migrations:
    ```bash
-   npx prisma migrate dev
+   npx prisma migrate
    ```
 6. Start the server:
    ```bash
