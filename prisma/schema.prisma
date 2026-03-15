@@ -4,13 +4,12 @@
 // Get a free hosted Postgres database in seconds: `npx create-db`
 
 generator client {
-  provider = "prisma-client"
-  output   = "../generated/prisma"
+  provider = "prisma-client-js"
+  output   = "../generated"
 }
 
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URL")
 }
 
 model Wallet {
@@ -27,22 +26,15 @@ model Wallet {
 
 model Transaction {
   id String @id @default(cuid())
-  sender_wallet_id String
-  receiver_wallet_id String
+  sender_wallet_id String?
+  receiver_wallet_id String?
   amount Float
-  type TransactionType
+  type String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   
-  sender_wallet Wallet @relation("SentTransactions", fields: [sender_wallet_id], references: [id])
-  receiver_wallet Wallet @relation("ReceivedTransactions", fields: [receiver_wallet_id], references: [id])
-}
-
-enum TransactionType {
-  DEPOSIT
-  SENT
-  RECEIVED
-  WITHDRAW
+  sender_wallet Wallet? @relation("SentTransactions", fields: [sender_wallet_id], references: [id])
+  receiver_wallet Wallet? @relation("ReceivedTransactions", fields: [receiver_wallet_id], references: [id])
 }
 
 
