@@ -12,6 +12,57 @@ Postman collection for Wallet API backend project. This collection includes all 
 - Transfer money
 - Get transaction (SENT/RECEIVED,DEPOSIT,WITHDRAW) history for a Wallet
 
+## Validations
+
+### Wallet Controller Validations
+
+#### Create Wallet
+- **Username required**: Validates that username is provided
+- **Username uniqueness**: Checks if username already exists
+
+#### Deposit Wallet
+- **Required fields**: Validates username and amount are provided
+- **Empty username**: Prevents empty username strings
+
+#### Get Wallet
+- **Wallet existence**: Returns 404 if wallet not found
+
+#### Transfer Funds
+- **Wallet existence**: Validates source wallet exists
+- **Sufficient funds**: Checks if source wallet has enough balance
+- **Required fields**: Validates recipient and amount are provided
+- **Self-transfer prevention**: Prevents transferring to same user
+- **Recipient existence**: Validates recipient wallet exists
+
+#### Withdraw Wallet
+- **Required fields**: Validates username and amount are provided
+- **Empty username**: Prevents empty username strings
+
+### Transaction Controller Validations
+
+#### Get Transactions
+- **Username required**: Validates username is provided
+- **Transaction type validation**: Ensures transaction type is one of: SENT, RECEIVED, DEPOSIT, WITHDRAW
+
+### Service Layer Validations
+
+#### Transaction Service
+- **Amount validation**: Throws error if amount is null
+
+### Database Schema Validations
+
+#### Prisma Schema
+- **Username uniqueness**: Enforced at database level with unique constraint
+- **Required fields**: Database enforces non-null constraints for required fields
+- **Transaction and wallet IDs are uniquely generated using CUIDs**: with uniqueness enforced at the database level to enhance security.
+
+### Validation Types Summary
+- **Input validation**: Required fields, empty strings
+- **Business logic**: Sufficient funds, self-transfer prevention
+- **Data integrity**: Username uniqueness, wallet existence
+- **Enum validation**: Transaction type restrictions
+- **Error handling**: Proper HTTP status codes (400, 404, 500)
+
 ## Tech Stack
 
 - Node.js
