@@ -1,9 +1,9 @@
 import { Request, Response } from "express";
-import prisma from "../lib/prisma";
+import { prisma } from "../lib/prisma"; 
 import { createTransaction, TransactionType } from "../services/transaction.service";
-import { creditWallet, debitWallet, getWalletValidate } from "../services/wallet.service";
+import { debitWallet, getWalletValidate, updateWalletBalance, withdrawFundsWallet } from "../services/wallet.service";
 
-export async function createWallet(req: Request, res: Response) {
+async function createWallet(req: Request, res: Response) {
     const { username } = req.body;
     
     try{
@@ -21,7 +21,8 @@ export async function createWallet(req: Request, res: Response) {
     
 }
 
-export async function depositWallet(req: Request, res: Response) {
+async function depositWallet(req: Request, res: Response) {
+    console.log(req.body);
     const { username, amount } = req.body;
 
     if(!username || !amount){
@@ -35,7 +36,9 @@ export async function depositWallet(req: Request, res: Response) {
     
     
     try{
-        const wallet = await depositWallet(username, amount);
+        const wallet = await updateWalletBalance(username, amount);
+
+        console.log("Wallet updated:", username, amount, TransactionType.DEPOSIT);
 
         await createTransaction(null, username, amount, TransactionType.DEPOSIT);
 
@@ -45,13 +48,18 @@ export async function depositWallet(req: Request, res: Response) {
     }
 }
 
-export async function getWallet(req: Request, res: Response) {
-    const { username } = req.body;
+
+
+
+async function getWallet(req: Request, res: Response) {
+    const { username } = req.params;
+
+    console.log("Get wallet:", username);
 
     try{
         const wallet = await prisma.wallet.findUnique({
             where: {
-                userName: username
+                userName: username as string
             }
         });
 
@@ -61,7 +69,7 @@ export async function getWallet(req: Request, res: Response) {
     }
 }
 
-export async function transferFunds(req: Request, res: Response) {
+async function transferFunds(req: Request, res: Response) {
     const { username, amount, userFunded } = req.body;
 
     const currentAmount = await prisma.wallet.findUnique({
@@ -69,6 +77,10 @@ export async function transferFunds(req: Request, res: Response) {
             userName: username
         }
     });
+
+    if(!currentAmount){
+        return res.status(404).json({ error: "Wallet not found" });
+    }
 
     if(currentAmount.balance < amount){
         return res.status(400).json({ error: "Insufficient funds" });
@@ -88,7 +100,7 @@ export async function transferFunds(req: Request, res: Response) {
 
 
         await debitWallet(username, amount);
-        await creditWallet(userFunded, amount);
+        await updateWalletBalance(userFunded, amount);
 
 
         await createTransaction(username, userFunded, amount, TransactionType.SENT);
@@ -101,8 +113,10 @@ export async function transferFunds(req: Request, res: Response) {
 }
 
 
-export async function withdrawWallet(req: Request, res: Response) {
+async function withdrawWallet(req: Request, res: Response) {
     const { username, amount } = req.body;
+
+    console.log("Withdraw wallet:", username, amount);
 
     if(!username || !amount){
         return res.status(400).json({ error: "Username and amount are required" });
@@ -112,7 +126,9 @@ export async function withdrawWallet(req: Request, res: Response) {
         return res.status(400).json({ error: "Username cannot be empty" });
     }  
     try{
-        const wallet = await withdrawWallet(username, amount);
+        const wallet = await withdrawFundsWallet(username, amount);
+
+        console.log("Wallet withdrawn:", username, amount, TransactionType.WITHDRAWAL);
 
         await createTransaction(username, null, amount, TransactionType.WITHDRAWAL);
 
@@ -120,4 +136,12 @@ export async function withdrawWallet(req: Request, res: Response) {
     } catch (error) {
         res.status(500).json({ error: "Internal server error" });
     }
+}
+
+export {
+    createWallet,
+    depositWallet,
+    getWallet,
+    transferFunds,
+    withdrawWallet
 }

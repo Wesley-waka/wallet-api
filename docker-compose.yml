@@ -1,33 +1,31 @@
 version: '3.8'
-
 services:
   wallet-api:
     build: .
     ports:
-      - "3000:3000"
+      - "4000:4000"
     environment:
-      - NODE_ENV=production
-    volumes:
-      - .:/app
+      NODE_ENV: production
+      DATABASE_URL: postgresql://wallet:wallet@postgres:5432/wallet
     restart: unless-stopped
     depends_on:
       - postgres
     networks:
       - wallet-network
-      
+
   postgres:
-    image: postgres:15
+    image: postgres:15-alpine
     environment:
       POSTGRES_DB: wallet
       POSTGRES_USER: wallet
       POSTGRES_PASSWORD: wallet
     ports:
-      - "5432:5432"
+      - "5433:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
+    restart: unless-stopped
     networks:
       - wallet-network
-    restart: unless-stopped
 
 volumes:
   postgres_data:

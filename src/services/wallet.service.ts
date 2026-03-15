@@ -1,6 +1,6 @@
-import prisma from "../lib/prisma";
+import { prisma } from "../lib/prisma";
 
-export async function getWalletValidate(username: string) {
+async function getWalletValidate(username: string) {
     const wallet = await prisma.wallet.findUnique({
         where: {
             userName: username
@@ -9,24 +9,15 @@ export async function getWalletValidate(username: string) {
     return wallet;
 }
 
-export async function depositWallet(username: string, amount: number) {
-    const wallet = await prisma.wallet.update({
-        where: {
-            userName: username
-        },
-        data: {
-            balance: {
-                increment: amount
-            }
-        }
-    });
-    return wallet;
-
-
-
+async function updateWalletBalance(username: string, amount: number) {
+  return prisma.wallet.update({
+    where: { userName: username },
+    data: { balance: { increment: amount } },
+  });
 }
 
-export async function updateWallet(username: string, amount: number) {
+
+async function updateWallet(username: string, amount: number) {
     const wallet = await prisma.wallet.update({
         where: {
             userName: username
@@ -41,7 +32,7 @@ export async function updateWallet(username: string, amount: number) {
 }
 
 
-export async function withdrawWallet(username: string, amount: number) {
+async function withdrawFundsWallet(username: string, amount: number) {
     const wallet = await prisma.wallet.update({
         where: {
             userName: username
@@ -55,21 +46,7 @@ export async function withdrawWallet(username: string, amount: number) {
     return wallet;
 }
 
-export async function fundWallet(username: string, amount: number) {
-    const wallet = await prisma.wallet.update({
-        where: {
-            userName: username
-        },
-        data: {
-            balance: {
-                increment: amount
-            }
-        }
-    });
-    return wallet;
-}
-
-export async function createWallet(username: string) {
+async function createWallet(username: string) {
     const wallet = await prisma.wallet.create({
         data: {
             userName: username
@@ -78,21 +55,8 @@ export async function createWallet(username: string) {
     return wallet;
 }
 
-export async function creditWallet(username: string, amount: number) {
-    const wallet = await prisma.wallet.update({
-        where: {
-            userName: username
-        },
-        data: {
-            balance: {
-                increment: amount
-            }
-        }
-    });
-    return wallet;
-}
 
-export async function debitWallet(username: string, amount: number) {
+async function debitWallet(username: string, amount: number) {
     const wallet = await prisma.wallet.update({
         where: {
             userName: username
@@ -105,3 +69,13 @@ export async function debitWallet(username: string, amount: number) {
     });
     return wallet;
 }
+
+export {
+    getWalletValidate,
+    updateWalletBalance,
+    updateWallet,
+    withdrawFundsWallet,
+    createWallet,
+    debitWallet
+}
+

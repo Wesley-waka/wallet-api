@@ -1,8 +1,8 @@
 
-import prisma from "../lib/prisma";
+import { prisma } from "../lib/prisma"; 
 import { Request, Response } from "express";
 
-export async function getTransactions(req: Request, res: Response) {
+async function getTransactions(req: Request, res: Response) {
     const { username,transactionType } = req.body;
 
     if(!username){
@@ -28,4 +28,8 @@ export async function getTransactions(req: Request, res: Response) {
     } catch (error) {
         res.status(500).json({ error: "Internal server error" });
     }
+}
+
+export {
+    getTransactions
 }
