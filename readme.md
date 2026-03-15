@@ -23,38 +23,8 @@ Postman collection for Wallet API backend project. This collection includes all 
 - Docker Compose
 
 ## Project Structure
-wallet-api/
-├── .env
-├── .git/
-├── .gitignore
-├── Dockerfile
-├── Wallet-API-Postman-Collection.json  # API testing collection
-├── docker-compose.yml
-├── generated/                    # Generated files (21 items)
-├── node_modules/
-├── package-lock.json
-├── package.json
-├── prisma/                       # Database configuration
-│   ├── migrations/
-│   └── schema.prisma
-├── prisma.config.ts              # Prisma configuration
-├── readme.md
-├── src/                          # Source code
-│   ├── config/
-│   ├── controllers/              # Request handlers
-│   │   ├── transaction.controller.ts
-│   │   └── wallet.controller.ts
-│   ├── index.ts
-│   ├── lib/                      # Library utilities
-│   │   └── prisma.ts
-│   ├── routes/                   # API route definitions
-│   │   ├── transaction.route.ts
-│   │   └── wallet.route.ts
-│   ├── server.ts                 # Server configuration
-│   └── services/                 # Business logic
-│       ├── transaction.service.ts
-│       └── wallet.service.ts
-└── tsconfig.json
+
+![Project Structure](./project-structure.png)
 
 
 ## ERD Diagram
