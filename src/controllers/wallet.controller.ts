@@ -35,6 +35,10 @@ async function depositWallet(req: Request, res: Response) {
     // console.log(req.body);
     const { username, amount } = req.body;
 
+    if(typeof amount !== "number"){
+        return res.status(400).json({ error: "Enter valid amount" });
+    }
+
     if(!username || !amount){
         return res.status(400).json({ error: "Username and amount are required" });
     }
@@ -43,9 +47,6 @@ async function depositWallet(req: Request, res: Response) {
         return res.status(400).json({ error: "Username cannot be empty" });
     }
 
-     
-
-    
     
     try{
         // console.log("Deposit wallet:", username, amount);
@@ -117,7 +118,10 @@ async function getWalletBalance(req: Request, res: Response) {
 async function transferFunds(req: Request, res: Response) {
     const { username, amount, userFunded } = req.body;
 
-    
+    if(typeof amount !== "number"){
+        return res.status(400).json({ error: "Enter valid amount" });
+    }
+
 
     const currentAmount = await prisma.wallet.findUnique({
         where: {
@@ -132,6 +136,10 @@ async function transferFunds(req: Request, res: Response) {
             isDeleted: false
         }
     });
+
+    if(typeof amount !== "number"){
+        return res.status(400).json({ error: "Enter valid amount" });
+    }
 
     if(!userFundedWallet){
         return res.status(404).json({ error: "User funded not found" });
@@ -177,6 +185,10 @@ async function transferFunds(req: Request, res: Response) {
 
 async function withdrawWallet(req: Request, res: Response) {
     const { username, amount } = req.body;
+
+    if(typeof amount !== "number"){
+        return res.status(400).json({ error: "Enter valid amount" });
+    }
 
     // console.log("Withdraw wallet:", username, amount);
 
