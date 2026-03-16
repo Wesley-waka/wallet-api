@@ -80,7 +80,7 @@ Postman collection for Wallet API backend project. This collection includes all 
 
 ## ERD Diagram
 
-![ERD](./WalletERDpng.png)
+![ERD](./Wallet.png)
 
 ## GIT Flow Diagram
 
