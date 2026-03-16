@@ -9,7 +9,7 @@ async function getTransactions(req: Request, res: Response) {
         return res.status(400).json({ error: "Username is required" });
     }
 
-    if(transactionType && (transactionType !== "SENT" && transactionType !== "RECEIVED" && transactionType !== "DEPOSIT" && transactionType !== "WITHDRAW")){
+    if(transactionType && (transactionType !== "SENT" && transactionType !== "RECEIVED" && transactionType !== "DEPOSIT" && transactionType !== "WITHDRAWAL")){
         return res.status(400).json({ error: "Transaction type must be SENT, RECEIVED, DEPOSIT or WITHDRAW" });
     }
 
