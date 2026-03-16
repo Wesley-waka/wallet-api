@@ -3,3 +3,6 @@ node_modules
 src/generated
 generated
 .env
+prisma/migrations
+requests.http
+dist
