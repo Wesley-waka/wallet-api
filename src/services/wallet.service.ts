@@ -3,7 +3,8 @@ import { prisma } from "../lib/prisma";
 async function getWalletValidate(username: string) {
     const wallet = await prisma.wallet.findUnique({
         where: {
-            userName: username
+            userName: username,
+            isDeleted: false
         }
     });
     return wallet;
@@ -11,7 +12,7 @@ async function getWalletValidate(username: string) {
 
 async function updateWalletBalance(username: string, amount: number) {
   return prisma.wallet.update({
-    where: { userName: username },
+    where: { userName: username},
     data: { balance: { increment: amount } },
   });
 }
