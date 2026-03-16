@@ -12,12 +12,19 @@ datasource db {
   provider = "postgresql"
 }
 
+enum TransactionStatus {
+  PENDING
+  COMPLETED
+  FAILED
+}
+
 model Wallet {
   id String @id @default(cuid())
   balance Float @default(0)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   userName String @unique
+  isDeleted Boolean @default(false)
 
   sentTransactions     Transaction[] @relation("SentTransactions")
   receivedTransactions Transaction[] @relation("ReceivedTransactions")
@@ -30,6 +37,7 @@ model Transaction {
   receiver_wallet_id String?
   amount Float
   type String
+  status TransactionStatus @default(COMPLETED)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   

@@ -92,7 +92,83 @@
 								}
 							],
 							"cookie": [],
-							"body": "{\n  \"id\": \"clx123abc456def789\",\n  \"userName\": \"xWaka\",\n  \"balance\": 0,\n  \"createdAt\": \"2024-03-15T10:30:00.000Z\",\n  \"updatedAt\": \"2024-03-15T10:30:00.000Z\"\n}"
+							"body": "{\n  \"id\": \"clx123abc456def789\",\n  \"userName\": \"xWaka\",\n  \"balance\": 0,\n  \"createdAt\": \"2024-03-15T10:30:00.000Z\",\n  \"updatedAt\": \"2024-03-15T10:30:00.000Z\",\n  \"isDeleted\": false\n}"
+						},
+						{
+							"name": "Validation Error - Username Required",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{}"
+								},
+								"url": {
+									"raw": "http://localhost:4000/wallet",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "4000",
+									"path": [
+										"wallet"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"error\": \"Username is required\"\n}"
+						},
+						{
+							"name": "Validation Error - Username Already Exists",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"username\": \"xWaka\"\n}"
+								},
+								"url": {
+									"raw": "http://localhost:4000/wallet",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "4000",
+									"path": [
+										"wallet"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"error\": \"Username already exists\"\n}"
 						}
 					]
 				},
@@ -143,15 +219,14 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "http://localhost:4000/wallet/xWaka",
+									"raw": "http://localhost:4000/wallet/",
 									"protocol": "http",
 									"host": [
 										"localhost"
 									],
 									"port": "4000",
 									"path": [
-										"wallet",
-										"xWaka"
+										"wallet"
 									]
 								}
 							},
@@ -165,7 +240,7 @@
 								}
 							],
 							"cookie": [],
-							"body": "{\n  \"id\": \"clx123abc456def789\",\n  \"userName\": \"xWaka\",\n  \"balance\": 1500.50,\n  \"createdAt\": \"2024-03-15T10:30:00.000Z\",\n  \"updatedAt\": \"2024-03-15T11:45:00.000Z\"\n}"
+							"body": "{\n  \"id\": \"clx123abc456def789\",\n  \"userName\": \"xWaka\",\n  \"balance\": 1500.50,\n  \"createdAt\": \"2024-03-15T10:30:00.000Z\",\n  \"updatedAt\": \"2024-03-15T11:45:00.000Z\",\n  \"isDeleted\": false\n}"
 						},
 						{
 							"name": "Wallet Not Found",
@@ -185,8 +260,8 @@
 									]
 								}
 							},
-							"status": "OK",
-							"code": 200,
+							"status": "Not Found",
+							"code": 404,
 							"_postman_previewlanguage": "json",
 							"header": [
 								{
@@ -195,7 +270,7 @@
 								}
 							],
 							"cookie": [],
-							"body": "null"
+							"body": "{\n  \"error\": \"Wallet not found\"\n}"
 						}
 					]
 				},
@@ -283,7 +358,7 @@
 								}
 							],
 							"cookie": [],
-							"body": "{\n  \"id\": \"clx123abc456def789\",\n  \"userName\": \"xWaka\",\n  \"balance\": 1000,\n  \"createdAt\": \"2024-03-15T10:30:00.000Z\",\n  \"updatedAt\": \"2024-03-15T11:45:00.000Z\"\n}"
+							"body": "{\n  \"id\": \"clx123abc456def789\",\n  \"userName\": \"xWaka\",\n  \"balance\": 1000,\n  \"createdAt\": \"2024-03-15T10:30:00.000Z\",\n  \"updatedAt\": \"2024-03-15T11:45:00.000Z\",\n  \"isDeleted\": false\n}"
 						}
 					]
 				},
@@ -371,7 +446,7 @@
 								}
 							],
 							"cookie": [],
-							"body": "{\n  \"id\": \"clx123abc456def789\",\n  \"userName\": \"xWaka\",\n  \"balance\": 500,\n  \"createdAt\": \"2024-03-15T10:30:00.000Z\",\n  \"updatedAt\": \"2024-03-15T11:50:00.000Z\"\n}"
+							"body": "{\n  \"id\": \"clx123abc456def789\",\n  \"userName\": \"xWaka\",\n  \"balance\": 500,\n  \"createdAt\": \"2024-03-15T10:30:00.000Z\",\n  \"updatedAt\": \"2024-03-15T11:50:00.000Z\",\n  \"isDeleted\": false\n}"
 						},
 						{
 							"name": "Insufficient Funds",
@@ -540,6 +615,196 @@
 							"body": "{\n  \"error\": \"Insufficient funds\"\n}"
 						}
 					]
+				},
+				{
+					"name": "Get Wallet Balance",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Response has balance data\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property('username');",
+									"    pm.expect(jsonData).to.have.property('balance');",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:4000/wallet//balance",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"wallet",
+								"",
+								"balance"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:4000/wallet//balance",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "4000",
+									"path": [
+										"wallet",
+										"",
+										"balance"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"username\": \"xWaka\",\n  \"balance\": 1500.50\n}"
+						},
+						{
+							"name": "Wallet Not Found",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:4000/wallet/nonexistent/balance",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "4000",
+									"path": [
+										"wallet",
+										"nonexistent",
+										"balance"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"error\": \"Wallet not found\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Delete Wallet",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Response has wallet data\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property('userName');",
+									"    pm.expect(jsonData).to.have.property('isDeleted');",
+									"    pm.expect(jsonData.isDeleted).to.eql(true);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"xWaka\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:4000/wallet",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"wallet"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"username\": \"xWaka\"\n}"
+								},
+								"url": {
+									"raw": "http://localhost:4000/wallet",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "4000",
+									"path": [
+										"wallet"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"id\": \"clx123abc456def789\",\n  \"userName\": \"xWaka\",\n  \"balance\": 0,\n  \"createdAt\": \"2024-03-15T10:30:00.000Z\",\n  \"updatedAt\": \"2024-03-15T12:00:00.000Z\",\n  \"isDeleted\": true\n}"
+						}
+					]
 				}
 			]
 		},
@@ -627,7 +892,7 @@
 								}
 							],
 							"cookie": [],
-							"body": "[\n  {\n    \"id\": \"clx456def789ghi012\",\n    \"sender_wallet_id\": \"clx123abc456def789\",\n    \"receiver_wallet_id\": \"clx789ghi012jkl345\",\n    \"amount\": 200,\n    \"type\": \"SENT\",\n    \"createdAt\": \"2024-03-15T12:00:00.000Z\",\n    \"updatedAt\": \"2024-03-15T12:00:00.000Z\"\n  },\n  {\n    \"id\": \"clx789ghi012jkl345\",\n    \"sender_wallet_id\": null,\n    \"receiver_wallet_id\": \"clx123abc456def789\",\n    \"amount\": 1000,\n    \"type\": \"DEPOSIT\",\n    \"createdAt\": \"2024-03-15T11:45:00.000Z\",\n    \"updatedAt\": \"2024-03-15T11:45:00.000Z\"\n  }\n]"
+							"body": "[\n  {\n    \"id\": \"clx456def789ghi012\",\n    \"sender_wallet_id\": \"clx123abc456def789\",\n    \"receiver_wallet_id\": \"clx789ghi012jkl345\",\n    \"amount\": 200,\n    \"type\": \"SENT\",\n    \"status\": \"COMPLETED\",\n    \"createdAt\": \"2024-03-15T12:00:00.000Z\",\n    \"updatedAt\": \"2024-03-15T12:00:00.000Z\"\n  },\n  {\n    \"id\": \"clx789ghi012jkl345\",\n    \"sender_wallet_id\": null,\n    \"receiver_wallet_id\": \"clx123abc456def789\",\n    \"amount\": 1000,\n    \"type\": \"DEPOSIT\",\n    \"status\": \"COMPLETED\",\n    \"createdAt\": \"2024-03-15T11:45:00.000Z\",\n    \"updatedAt\": \"2024-03-15T11:45:00.000Z\"\n  }\n]"
 						}
 					]
 				},
@@ -712,7 +977,7 @@
 								}
 							],
 							"cookie": [],
-							"body": "[\n  {\n    \"id\": \"clx456def789ghi012\",\n    \"sender_wallet_id\": \"clx123abc456def789\",\n    \"receiver_wallet_id\": \"clx789ghi012jkl345\",\n    \"amount\": 200,\n    \"type\": \"SENT\",\n    \"createdAt\": \"2024-03-15T12:00:00.000Z\",\n    \"updatedAt\": \"2024-03-15T12:00:00.000Z\"\n  }\n]"
+							"body": "[\n  {\n    \"id\": \"clx456def789ghi012\",\n    \"sender_wallet_id\": \"clx123abc456def789\",\n    \"receiver_wallet_id\": \"clx789ghi012jkl345\",\n    \"amount\": 200,\n    \"type\": \"SENT\",\n    \"status\": \"COMPLETED\",\n    \"createdAt\": \"2024-03-15T12:00:00.000Z\",\n    \"updatedAt\": \"2024-03-15T12:00:00.000Z\"\n  }\n]"
 						},
 						{
 							"name": "Success - RECEIVED transactions",
@@ -750,7 +1015,7 @@
 								}
 							],
 							"cookie": [],
-							"body": "[\n  {\n    \"id\": \"clx012jkl345mno678\",\n    \"sender_wallet_id\": \"clx789ghi012jkl345\",\n    \"receiver_wallet_id\": \"clx123abc456def789\",\n    \"amount\": 150,\n    \"type\": \"RECEIVED\",\n    \"createdAt\": \"2024-03-15T12:15:00.000Z\",\n    \"updatedAt\": \"2024-03-15T12:15:00.000Z\"\n  }\n]"
+							"body": "[\n  {\n    \"id\": \"clx012jkl345mno678\",\n    \"sender_wallet_id\": \"clx789ghi012jkl345\",\n    \"receiver_wallet_id\": \"clx123abc456def789\",\n    \"amount\": 150,\n    \"type\": \"RECEIVED\",\n    \"status\": \"COMPLETED\",\n    \"createdAt\": \"2024-03-15T12:15:00.000Z\",\n    \"updatedAt\": \"2024-03-15T12:15:00.000Z\"\n  }\n]"
 						}
 					]
 				}
