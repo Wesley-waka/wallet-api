@@ -88,7 +88,7 @@ Postman collection for Wallet API backend project. This collection includes all 
 
 ## Setup Instructions
 
-#### Docker Setup
+#### OPTION 1:Docker Setup
 
 1. Install Docker and Docker Compose
 2. Ensure Docker is running and port 4000 is available
@@ -99,7 +99,7 @@ Postman collection for Wallet API backend project. This collection includes all 
 4. Check the port in `docker-compose.yml` (default is 4000)
 5. Import the Postman collection to test the API `Wallet-API-Postman-Collection.json` or use the API documentation at `https://documenter.getpostman.com/view/29202259/2sBXigMDuJ`
 
-#### Local Setup
+#### OPTION 2: Local Setup
 
 1. Install Node.js (v18 or higher)
 2. Install dependencies:
@@ -118,7 +118,7 @@ Postman collection for Wallet API backend project. This collection includes all 
    ```
 5. Run database migrations:
    ```bash
-   npx prisma migrate
+   npx prisma generate
    ```
 6. Start the server:
    ```bash
