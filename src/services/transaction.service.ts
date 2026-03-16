@@ -7,12 +7,19 @@ enum TransactionType {
   DEPOSIT = "DEPOSIT",
 }
 
+enum TransactionStatus {
+  PENDING = "PENDING",
+  COMPLETED = "COMPLETED",
+  FAILED = "FAILED",
+}
+
 
 async function createTransaction(
   senderUsername: string | null,
   receiverUsername: string | null,
   amount: number,
-  transaction_type: TransactionType
+  transaction_type: TransactionType,
+  status : TransactionStatus
 ) {
   if (amount === null) throw new Error("Amount is required");
 
@@ -30,6 +37,7 @@ async function createTransaction(
       receiver_wallet_id: receiverId ?? senderId!, 
       amount,
       type: transaction_type,
+      status,
     },
   });
 }
@@ -37,5 +45,6 @@ async function createTransaction(
 
 export {
     createTransaction,
-    TransactionType
+    TransactionType,
+    TransactionStatus
 }
