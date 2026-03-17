@@ -6,7 +6,7 @@ services:
       - "4000:4000"
     environment:
       NODE_ENV: production
-      DATABASE_URL: postgresql://wallet:wallet@postgres:5433/wallet
+      DATABASE_URL: postgresql://wallet:wallet@postgres:5432/wallet
     restart: unless-stopped
     depends_on:
       - postgres
