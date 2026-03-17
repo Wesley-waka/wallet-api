@@ -94,7 +94,7 @@ Postman collection for Wallet API backend project. This collection includes all 
 2. Ensure Docker is running and port 4000 is available
 3. Run the following command to start the database:
    ```bash
-   docker-compose up -d
+   npm i && docker-compose build --no-cache && docker-compose up -d
    ```
 4. Check the port in `docker-compose.yml` (default is 4000)
 5. Import the Postman collection to test the API `Wallet-API-Postman-Collection.json` or use the API documentation at `https://documenter.getpostman.com/view/29202259/2sBXigMDuJ`
